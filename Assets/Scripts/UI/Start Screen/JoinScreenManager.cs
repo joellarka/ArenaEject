@@ -8,14 +8,18 @@ public class JoinScreenManager : MonoBehaviour
 {
     private static JoinScreenManager instance;
     public static JoinScreenManager Instance { get => instance; }
+
     [SerializeField] [Range(2, 8)] private int maxPlayersAllowed = 4;
-    private List<string> playerControllersJoined = new List<string>();
-    private Dictionary<string, int> controllerToPlayerBinding= new Dictionary<string, int>();
+    [Space]
     [SerializeField] private GameObject playerDisplayPrefab;
     [SerializeField] private Transform displayParent;
     [SerializeField] private Button startButton;
+    [Space]
     [SerializeField] private List<Color> playerColors = new List<Color>();
 
+    private List<string> playerControllersJoined = new List<string>();
+    private Dictionary<int, int> playerToControllerIndex= new Dictionary<int, int>();
+    public Dictionary<int, int> PlayerToControllerIndex { get => playerToControllerIndex;}
 
     private void OnEnable()
     {
@@ -23,7 +27,7 @@ public class JoinScreenManager : MonoBehaviour
         {
             instance = this;
             playerControllersJoined = new List<string>();
-            controllerToPlayerBinding = new Dictionary<string, int>();
+            playerToControllerIndex = new Dictionary<int, int>();
             maxPlayersAllowed = Math.Clamp(maxPlayersAllowed, 2, 8);
         }
         else
@@ -40,6 +44,9 @@ public class JoinScreenManager : MonoBehaviour
         DetermineIfStartConditionMet();
     }
 
+    /// <summary>
+    /// TODO: Allow higher number of controls to join, despite max player count
+    /// </summary>
     private void CheckForJoiningPlayers()
     {
         for (int i = 1; i < maxPlayersAllowed + 1; i++)
@@ -49,7 +56,7 @@ public class JoinScreenManager : MonoBehaviour
                 string inputDevice = $"InputDevice_{i}";
                 if (playerControllersJoined.Contains(inputDevice)) return;
 
-                controllerToPlayerBinding.Add(inputDevice, playerControllersJoined.Count+1);
+                playerToControllerIndex.Add(playerControllersJoined.Count + 1, i);
                 playerControllersJoined.Add(inputDevice);
             }
         }
@@ -73,25 +80,28 @@ public class JoinScreenManager : MonoBehaviour
         }
 
         // Generate new display
-        for (int i = 0; i < playerControllersJoined.Count; i++)
+        for (int i = 1; i < playerControllersJoined.Count+1; i++)
         {
             GameObject displayObj = Instantiate(playerDisplayPrefab, Vector3.zero, Quaternion.identity, displayParent);
             JoinDisplay displayComponents = displayObj.GetComponent<JoinDisplay>();
            
-            if (!controllerToPlayerBinding.TryGetValue(playerControllersJoined[i], out int playerNumber))
+            if (!playerToControllerIndex.TryGetValue(i, out int controllerIndex))
             {
                 Debug.LogError(playerControllersJoined[i] + "not included in dictonary, state mutated unexpectantly");
                 return;
             }
             
-            displayComponents.playerText.text = $"Player {playerNumber}";
-            displayComponents.controllerText.text = $"Controller {(playerControllersJoined[i])[^1]}";
-            if (playerColors[i] != null) {
-                displayComponents.displayImage.color = playerColors[i];
+            displayComponents.playerText.text = $"Player {i}";
+            displayComponents.controllerText.text = $"Controller {controllerIndex}";
+            if (playerColors[i-1] != null) {
+                displayComponents.displayImage.color = playerColors[i-1];
             }
         }
     }
 
+    /// <summary>
+    /// Determine if two or more players have joined
+    /// </summary>
     private void DetermineIfStartConditionMet()
     {
         if (startButton == null) return;
@@ -105,4 +115,5 @@ public class JoinScreenManager : MonoBehaviour
             startButton.interactable = false;
         }
     }
+
 }

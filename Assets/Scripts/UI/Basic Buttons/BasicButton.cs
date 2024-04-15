@@ -27,7 +27,7 @@ public class BasicButton : MonoBehaviour
                     }
                 case ButtonType.START:
                     {
-                        btn.onClick.AddListener(StartGame);
+                        btn.onClick.AddListener(StartScreenManager.Instance.StartGame);
                         if (txt != null)
                         {
 
@@ -84,11 +84,6 @@ public class BasicButton : MonoBehaviour
 
 
         }
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(Paths.GAME_SCENE_NAME);
     }
 
     public void QuitGame()
