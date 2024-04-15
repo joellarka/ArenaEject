@@ -10,7 +10,7 @@ public class StartScreenManager : MonoBehaviour
     [SerializeField] private GameObject joinScreen;
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
-    [SerializeField] private List<GameObject> screens;
+    private List<GameObject> screens;
 
 
     private void Awake()
