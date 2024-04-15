@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private float maxSpeed = 25.0f;
+	private float maxSpeed = 18.0f;
 	private Vector3 rawInput;
 	private Vector3 velocity;
 	private Vector3 currentVelocity;
