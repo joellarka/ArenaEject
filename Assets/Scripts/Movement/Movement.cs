@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [HideInInspector] public bool appropriatlySpawned = false;
 	[SerializeField] private float maxSpeed = 18.0f;
     [SerializeField] private float acceleration = 20f;
 	private Vector3 rawInput;
@@ -24,7 +25,8 @@ public class Movement : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-        rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo")*-1f)/*.normalized*/;
+        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo")*-1f)/*.normalized*/;
+        else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         // Acceleration
         if (rawInput != Vector3.zero)

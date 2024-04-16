@@ -17,6 +17,7 @@ public class GameStartManager : MonoBehaviour
     {
         if (playerPrefab == null) return;
 
+        // Control player-controller-binding
         Dictionary<int, int> playerControllerMappings = PlayerData.playerToControllerBinding;
         if(playerControllerMappings == null)
         {
@@ -28,10 +29,12 @@ public class GameStartManager : MonoBehaviour
             };
         }
 
+        // Spawning
         foreach (int playerIndex in playerControllerMappings.Keys)
         {
             if(playerControllerMappings.TryGetValue(playerIndex, out int controllerIndex))
             {
+                // Get Sapwn location
                 Vector3 spawnAt = transform.position;
                 try
                 {
@@ -41,14 +44,35 @@ public class GameStartManager : MonoBehaviour
                 {
                     Debug.LogError("Appropriate spawnpoint not found, spawning on controller");
                 }
+
+                // Instansiate
                 GameObject playerObj = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
                 Movement playerMovement = playerObj.GetComponent<Movement>();
+                Aiming playerAim = playerObj.GetComponent<Aiming>();
+                
+                // Movement setup
                 if(playerMovement == null) {
                     Debug.LogError("Player prefab missing movement script");
-                    return;
+
                 }
-                playerMovement.playerIndex = playerIndex;
-                playerMovement.controllerIndex = controllerIndex;
+                else
+                {
+                    playerMovement.appropriatlySpawned = true;
+                    playerMovement.playerIndex = playerIndex;
+                    playerMovement.controllerIndex = controllerIndex;
+                }
+
+                // Aiming setup
+                if (playerAim == null)
+                {
+                    Debug.LogError("Player prefab missing aiming script");
+
+                }
+                else
+                {
+                    playerAim.appropriatlySpawned = true;
+                    playerAim.controllerIndex = controllerIndex;
+                }
 
             }
             else
