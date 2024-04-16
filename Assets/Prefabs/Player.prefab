@@ -104,6 +104,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 1
   lives: 1
+  colors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.9150943, g: 0, b: 0.054829244, a: 1}
+  - {r: 0.0040049935, g: 0.030560136, b: 0.8490566, a: 1}
+  - {r: 0.7169812, g: 0, b: 0.67784715, a: 1}
+  myRenderer: {fileID: 7920922967358441291}
 --- !u!114 &3575394810099702661
 MonoBehaviour:
   m_ObjectHideFlags: 0
