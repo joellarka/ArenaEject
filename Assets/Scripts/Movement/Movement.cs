@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour
 	private Vector3 rawInput;
     private Rigidbody rb;
 
-    [HideInInspector] public int playerIndex = 1;
     [HideInInspector] public int controllerIndex = 1;
 
     private void Awake()
@@ -25,8 +24,8 @@ public class Movement : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
-        else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), rb.velocity.y, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
+        else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), rb.velocity.y, Input.GetAxisRaw("Vertical")).normalized;
 
         // Acceleration
         if (rawInput != Vector3.zero)

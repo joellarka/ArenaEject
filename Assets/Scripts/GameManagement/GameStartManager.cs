@@ -47,26 +47,32 @@ public class GameStartManager : MonoBehaviour
 
                 // Instansiate
                 GameObject playerObj = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
+                PlayerStats playerStats = playerObj.GetComponent<PlayerStats>();
                 Movement playerMovement = playerObj.GetComponent<Movement>();
                 Aiming playerAim = playerObj.GetComponent<Aiming>();
                 
+                // Stats set-up
+                if(playerStats == null) {
+                    Debug.LogError("Player prefab missing PlayerStats script");
+                }
+                else
+                {
+                    playerStats.playerIndex = playerIndex;
+                }
+
                 // Movement setup
                 if(playerMovement == null) {
                     Debug.LogError("Player prefab missing movement script");
-
                 }
                 else
                 {
                     playerMovement.appropriatlySpawned = true;
-                    playerMovement.playerIndex = playerIndex;
                     playerMovement.controllerIndex = controllerIndex;
                 }
 
                 // Aiming setup
-                if (playerAim == null)
-                {
+                if (playerAim == null) {
                     Debug.LogError("Player prefab missing aiming script");
-
                 }
                 else
                 {
