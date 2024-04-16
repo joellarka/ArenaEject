@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo")*-1f)/*.normalized*/;
+        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
         else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         // Acceleration
