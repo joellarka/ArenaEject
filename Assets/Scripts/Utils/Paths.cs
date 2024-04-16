@@ -4,5 +4,6 @@ using UnityEngine;
 
 public static class Paths
 {
-    public const string GAME_SCENE_NAME = "_gameScene";
+    public const string GAME_SCENE_NAME = "_GameScene";
+    public const string START_SCENE_NAME = "_StartScreen";
 }

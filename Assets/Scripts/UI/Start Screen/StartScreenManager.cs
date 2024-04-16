@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartScreenManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class StartScreenManager : MonoBehaviour
     [SerializeField] private GameObject joinScreen;
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
-    [SerializeField] private List<GameObject> screens;
+    private List<GameObject> screens;
 
 
     private void Awake()
@@ -74,5 +75,13 @@ public class StartScreenManager : MonoBehaviour
                 s.SetActive(false);
             }
         }
+    }
+
+    public void StartGame()
+    {
+        Dictionary<int, int> pci = JoinScreenManager.Instance.PlayerToControllerIndex;
+        PlayerData.playerToControllerBinding = pci;
+
+        SceneManager.LoadScene(Paths.GAME_SCENE_NAME);
     }
 }
