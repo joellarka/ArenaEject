@@ -275,6 +275,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 68368969766091620, guid: da9b688efeb02457ba797082a8a8990d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4154
+      objectReference: {fileID: 0}
+    - target: {fileID: 68368969766091620, guid: da9b688efeb02457ba797082a8a8990d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4154
+      objectReference: {fileID: 0}
+    - target: {fileID: 68368969766091620, guid: da9b688efeb02457ba797082a8a8990d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4154
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: da9b688efeb02457ba797082a8a8990d, type: 3}
       propertyPath: m_Name
       value: Magma_Scene
@@ -496,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 2588111564409895984, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d9b09530c2e704c2b9f67f08dad955dd, type: 2}
+      objectReference: {fileID: 2100000, guid: ab2aac99b757c49b5a818f9778c9c56d, type: 2}
     - target: {fileID: 3875437330000771837, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_Name
       value: Plane
@@ -507,15 +519,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5775892465329637540, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_LocalScale.x
-      value: 18.134405
+      value: 26.147999
       objectReference: {fileID: 0}
     - target: {fileID: 5775892465329637540, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.869848
+      value: 12.789434
       objectReference: {fileID: 0}
     - target: {fileID: 5775892465329637540, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.869848
+      value: 12.789434
       objectReference: {fileID: 0}
     - target: {fileID: 5775892465329637540, guid: 2b799a6312b2b4034bfde575b1f65205, type: 3}
       propertyPath: m_LocalPosition.x
