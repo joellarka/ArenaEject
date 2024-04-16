@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private float maxSpeed = 18.0f;
+	[SerializeField] private float maxSpeed = 18.0f;
+    [SerializeField] private float acceleration = 20f;
 	private Vector3 rawInput;
-	private Vector3 velocity;
-	private Vector3 currentVelocity;
+    private Rigidbody rb;
 
-	void Update()
+    [HideInInspector] public int playerIndex = 1;
+    [HideInInspector] public int controllerIndex = 1;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
 	{
-		rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-		float smoothingTime = rawInput.sqrMagnitude > 0 ? 0.12f : 0.08f;
-		velocity = Vector3.SmoothDamp(velocity, rawInput * maxSpeed, ref currentVelocity, smoothingTime);
+        PlayerMovement();
+    }
 
-		if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
-		{
-			velocity = velocity.normalized * maxSpeed;
-		}
+	private void PlayerMovement()
+	{
+        rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo")*-1f)/*.normalized*/;
 
-		transform.position += velocity * Time.deltaTime;
-
-		if (velocity != Vector3.zero)
-		{
-			transform.rotation = Quaternion.LookRotation(velocity);
-		}
-	}
+        // Acceleration
+        if (rawInput != Vector3.zero)
+        {
+            rb.velocity += acceleration * maxSpeed * Time.deltaTime * rawInput;
+            if (rb.velocity.sqrMagnitude > maxSpeed * maxSpeed) rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+        else
+        {
+            // Deceleration
+            rb.velocity -= acceleration * maxSpeed * Time.deltaTime * rb.velocity.normalized;
+            if (rb.velocity.sqrMagnitude < 0.01) rb.velocity = Vector2.zero;
+        }
+    }
 }
