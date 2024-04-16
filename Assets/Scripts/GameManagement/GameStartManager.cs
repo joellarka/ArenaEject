@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameStartManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private List<Transform> spawnPoints;
 
     private void Start()
     {
@@ -31,7 +32,16 @@ public class GameStartManager : MonoBehaviour
         {
             if(playerControllerMappings.TryGetValue(playerIndex, out int controllerIndex))
             {
-                GameObject playerObj = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+                Vector3 spawnAt = transform.position;
+                try
+                {
+                    spawnAt = spawnPoints[playerIndex - 1].position;
+                }
+                catch
+                {
+                    Debug.LogError("Appropriate spawnpoint not found, spawning on controller");
+                }
+                GameObject playerObj = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
                 Movement playerMovement = playerObj.GetComponent<Movement>();
                 if(playerMovement == null) {
                     Debug.LogError("Player prefab missing movement script");
