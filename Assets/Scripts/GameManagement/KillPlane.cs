@@ -16,7 +16,6 @@ public class KillPlane : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
 
     [SerializeField] private int levelLoadTime = 3;
-    [SerializeField] private string[] levels;
 
     // TEMP
     private void Awake()
@@ -71,7 +70,7 @@ public class KillPlane : MonoBehaviour
                     gameIsOver = true;
                     Debug.LogError("No implementation for a TIED game");
                     
-                    StartCoroutine(ChangeScene());
+                    StartCoroutine(ChangeLevel(new List<int> {0, 1}));
                 }
                 else if (alivePlayers.Count == 1)
                 {
@@ -90,19 +89,34 @@ public class KillPlane : MonoBehaviour
         gameOverScreen.SetActive(true);
         gameOverText.text = $"Player {winner.playerIndex} WINS";
         
-        StartCoroutine(ChangeScene());
+        StartCoroutine(ChangeLevel(new List<int> {0, 1}));
     }
     
-    private IEnumerator ChangeScene()
+    private IEnumerator ChangeLevel(List<int> avoidedSceneIndex)
     {
-        string currentLevel = SceneManager.GetActiveScene().name;
-        List<string> levelList = new List<string>(levels);
-        levelList.Remove(currentLevel);
+        int sceneIndex = SceneManager.sceneCountInBuildSettings;
         
-        Debug.Log("Loading next level in 3 seconds...");
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex;
+
+        int counter = 0;
+        do
+        {
+            nextSceneIndex = Random.Range(0, sceneIndex);
+            counter++;
+            if (counter > 20)
+            {
+                Debug.Log("This level is the only one available in the builds settings. Reloading current level in " + levelLoadTime + " seconds...");
+                yield return new WaitForSeconds(levelLoadTime);
+                
+                SceneManager.LoadScene(currentLevelIndex);
+                yield break;
+            }
+        } while (nextSceneIndex == currentLevelIndex || avoidedSceneIndex.Contains(nextSceneIndex));
+        
+        Debug.Log("Loading next level in " + levelLoadTime + " seconds...");
         yield return new WaitForSeconds(levelLoadTime);
-        
-        int randomLevel = Random.Range(0, levelList.Count);
-        SceneManager.LoadScene(levelList[randomLevel]);
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
