@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &84899152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7633969538692819337, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
+  m_PrefabInstance: {fileID: 6296548186471224284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &252665948 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2670104623169518121, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
@@ -580,6 +591,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8002316427403002959, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
   m_PrefabInstance: {fileID: 6296548186471224284}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586284326 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5251462708202795699, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
+  m_PrefabInstance: {fileID: 6296548186471224284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1613518634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8475767063546425203, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
@@ -596,6 +618,10 @@ PrefabInstance:
     - target: {fileID: 2670104623169518121, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670104623169518121, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5779277581503338046, guid: 258ab80582a206f4d8a1ed92aa1d5190, type: 3}
       propertyPath: m_Pivot.x
@@ -815,9 +841,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 252665948}
     - target: {fileID: 5197516900069518111, guid: b7a49e236aab34e44a0daddc33051e3a, type: 3}
+      propertyPath: gameOverWinnerText
+      value: 
+      objectReference: {fileID: 1586284326}
+    - target: {fileID: 5197516900069518111, guid: b7a49e236aab34e44a0daddc33051e3a, type: 3}
       propertyPath: gameOverLoadingText
       value: 
       objectReference: {fileID: 1613518634}
+    - target: {fileID: 5197516900069518111, guid: b7a49e236aab34e44a0daddc33051e3a, type: 3}
+      propertyPath: gameOverResultsText
+      value: 
+      objectReference: {fileID: 84899152}
     - target: {fileID: 5197516900069518111, guid: b7a49e236aab34e44a0daddc33051e3a, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
