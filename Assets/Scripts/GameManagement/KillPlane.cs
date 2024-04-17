@@ -106,7 +106,7 @@ public class KillPlane : MonoBehaviour
             counter++;
             if (counter > 20)
             {
-                Debug.Log("This level is the only one available in the builds settings. Reloading current level...");
+                Debug.Log("This level is the only one available in the builds settings. Reloading current level in " + levelLoadTime + " seconds...");
                 yield return new WaitForSeconds(levelLoadTime);
                 
                 SceneManager.LoadScene(currentLevelIndex);
@@ -114,7 +114,7 @@ public class KillPlane : MonoBehaviour
             }
         } while (nextSceneIndex == currentLevelIndex || avoidedSceneIndex.Contains(nextSceneIndex));
         
-        Debug.Log("Loading next level in 3 seconds...");
+        Debug.Log("Loading next level in " + levelLoadTime + " seconds...");
         yield return new WaitForSeconds(levelLoadTime);
 
         SceneManager.LoadScene(nextSceneIndex);
