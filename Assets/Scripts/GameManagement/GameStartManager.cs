@@ -6,6 +6,7 @@ public class GameStartManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private List<Transform> spawnPoints;
+    [SerializeField] [Range(0,4)] private int playersToSpawn = 2;
 
     private void Start()
     {
@@ -21,12 +22,14 @@ public class GameStartManager : MonoBehaviour
         Dictionary<int, int> playerControllerMappings = PlayerData.playerToControllerBinding;
         if(playerControllerMappings == null)
         {
-            Debug.Log("Player Controller Bindings not found, constructing 2 player controller bindings");
-            playerControllerMappings = new Dictionary<int, int>()
+            Debug.Log($"Player Controller Bindings not found, constructing {playersToSpawn} player controller bindings");
+            playerControllerMappings = new Dictionary<int, int>();
+
+            for (int i = 1; i < playersToSpawn+1; i++)
             {
-                {1,1},
-                {2,2}
-            };
+                playerControllerMappings.Add(i,i);
+            }
+
         }
 
         // Spawning

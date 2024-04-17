@@ -11,11 +11,14 @@ public class WeaponUser : MonoBehaviour
 
     private void Update()
     {
-        
+        if(Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
+        {
+            TryFireWeapon();
+        }
     }
 
     private void TryFireWeapon()
     {
-
+        Debug.Log("Attempt fire!");
     }
 }
