@@ -11,7 +11,7 @@ public class WeaponUser : MonoBehaviour
 
     public List<Weapon> inventory = new List<Weapon>();
     private bool isNearWeapon = false;
-    private Weapon carriedWeapon;
+    public Weapon carriedWeapon;
     private Weapon nearbyWeapon;
     private Vector3 carriedWeaponOffset;
 
@@ -53,7 +53,9 @@ public class WeaponUser : MonoBehaviour
 
     private void TryFireWeapon()
     {
-        Debug.Log("Attempt fire!");
+        if (carriedWeapon == null) return;
+
+        bool result = carriedWeapon.TryShoot();
     }
 
     public void PickupWeapon()

@@ -8,6 +8,13 @@ public class Aiming : MonoBehaviour
     [HideInInspector] public int controllerIndex = 1;
     [SerializeField] [Range(0.3f, 3.2f)] private float rotationSpeedRads = 1;
 
+    Vector3 targetDir = Vector3.zero;
+
+
+    private void Start()
+    {
+        targetDir = transform.forward;
+    }
 
     private void Update()
     {
@@ -16,21 +23,40 @@ public class Aiming : MonoBehaviour
 
     private void PlayerLook()
     {
-        Vector3 input = Vector3.zero;
 
-        if (appropriatlySpawned) input = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Aim_Horizontal"), 0, Input.GetAxisRaw($"P{controllerIndex}_Aim_Vertical") * -1f);
-        else input = new Vector3(Input.GetAxisRaw($"Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-
-        if(input.sqrMagnitude < 0.5f)
+        if (appropriatlySpawned)
         {
-            input = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f).normalized;
+            float x = Input.GetAxisRaw($"P{controllerIndex}_Aim_Horizontal");
+            float y = 0;
+            float z = Input.GetAxisRaw($"P{controllerIndex}_Aim_Vertical") * -1f;
+
+            if (Mathf.Abs(x) < 0.2f) x = 0;
+            if (Mathf.Abs(z) < 0.2f) z = 0;
+
+            targetDir = new Vector3(x, y, z);
+        }
+        else targetDir = new Vector3(Input.GetAxisRaw($"Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+
+        if(targetDir.sqrMagnitude < 0.5f)
+        {
+            float x = Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo");
+            float y = 0;
+            float z = Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f;
+
+
+            if (Mathf.Abs(x) > 0.2f || Mathf.Abs(z) > 0.2f)
+            {
+                targetDir = new Vector3(x, y, z);
+            }
+
+            //input = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f).normalized;
         }
         else
         {
-            input.Normalize();
+            targetDir.Normalize();
         }
 
-        if(input != Vector3.zero)
+        if(targetDir != Vector3.zero)
         {
             // Instant roation
             /*
@@ -39,7 +65,7 @@ public class Aiming : MonoBehaviour
             */
 
 
-            float angle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(targetDir.x, targetDir.z) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeedRads);
         }

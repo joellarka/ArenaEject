@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider))]
 public class KillPlane : MonoBehaviour
@@ -14,13 +18,20 @@ public class KillPlane : MonoBehaviour
     [Header("Temp")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TMP_Text gameOverText;
-
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverLoadingText;
+    
     [SerializeField] private int levelLoadTime = 3;
 
     // TEMP
     private void Awake()
     {
         Time.timeScale = 1.0f;
+    }
+
+    private void Start()
+    {
+        gameOverText.transform.localScale = Vector3.zero;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,8 +80,8 @@ public class KillPlane : MonoBehaviour
                     // TODO: Tie
                     gameIsOver = true;
                     Debug.LogError("No implementation for a TIED game");
-                    
-                    StartCoroutine(ChangeLevel(new List<int> {0, 1}));
+
+                    EndGameTie();
                 }
                 else if (alivePlayers.Count == 1)
                 {
@@ -85,9 +96,28 @@ public class KillPlane : MonoBehaviour
     {
         if(gameOverScreen == null) return;
         gameIsOver = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0.2f;
+        
+        ShowEndGamePanel();
+    }
+    
+    private void EndGameTie()
+    {
+        if(gameOverScreen == null) return;
+        gameIsOver = true;
+        Time.timeScale = 0.2f;
+
+        ShowEndGamePanel();
+    }
+
+    private void ShowEndGamePanel()
+    {
         gameOverScreen.SetActive(true);
-        gameOverText.text = $"Player {winner.playerIndex} WINS";
+        gameOverText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
+        DOVirtual.DelayedCall(0.4f, () =>
+        {
+            gameOverPanel.transform.DOScale(1, 0.2f).SetEase(Ease.OutQuart);
+        });
         
         StartCoroutine(ChangeLevel(new List<int> {0, 1}));
     }
@@ -107,16 +137,32 @@ public class KillPlane : MonoBehaviour
             if (counter > 20)
             {
                 Debug.Log("This level is the only one available in the builds settings. Reloading current level in " + levelLoadTime + " seconds...");
-                yield return new WaitForSeconds(levelLoadTime);
+
+                StartCoroutine(Countdown(levelLoadTime + 2));
                 
+                DOVirtual.DelayedCall(2f, () =>
+                {
+                    gameOverLoadingText.transform.DOScale(1, 0.2f).SetEase(Ease.OutExpo);
+                });
+                
+                yield return new WaitForSecondsRealtime(levelLoadTime + 2);
                 SceneManager.LoadScene(currentLevelIndex);
                 yield break;
             }
         } while (nextSceneIndex == currentLevelIndex || avoidedSceneIndex.Contains(nextSceneIndex));
         
         Debug.Log("Loading next level in " + levelLoadTime + " seconds...");
-        yield return new WaitForSeconds(levelLoadTime);
-
+        yield return new WaitForSecondsRealtime(levelLoadTime + 2);
         SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    private IEnumerator Countdown(int countdownTime)
+    {
+        while (countdownTime > 0)
+        {
+            gameOverLoadingText.GetComponent<TMP_Text>().text = "Loading next level in " + countdownTime;
+            yield return new WaitForSecondsRealtime(1);
+            countdownTime--;
+        }
     }
 }
