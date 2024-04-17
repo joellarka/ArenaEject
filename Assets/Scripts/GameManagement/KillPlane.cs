@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider))]
 public class KillPlane : MonoBehaviour
@@ -13,6 +14,9 @@ public class KillPlane : MonoBehaviour
     [Header("Temp")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TMP_Text gameOverText;
+
+    [SerializeField] private int levelLoadTime = 3;
+    [SerializeField] private string[] levels;
 
     // TEMP
     private void Awake()
@@ -66,6 +70,8 @@ public class KillPlane : MonoBehaviour
                     // TODO: Tie
                     gameIsOver = true;
                     Debug.LogError("No implementation for a TIED game");
+                    
+                    StartCoroutine(ChangeScene());
                 }
                 else if (alivePlayers.Count == 1)
                 {
@@ -78,9 +84,25 @@ public class KillPlane : MonoBehaviour
 
     private void EndGame(PlayerStats winner)
     {
+        if(gameOverScreen == null) return;
         gameIsOver = true;
         Time.timeScale = 0;
         gameOverScreen.SetActive(true);
         gameOverText.text = $"Player {winner.playerIndex} WINS";
+        
+        StartCoroutine(ChangeScene());
+    }
+    
+    private IEnumerator ChangeScene()
+    {
+        string currentLevel = SceneManager.GetActiveScene().name;
+        List<string> levelList = new List<string>(levels);
+        levelList.Remove(currentLevel);
+        
+        Debug.Log("Loading next level in 3 seconds...");
+        yield return new WaitForSeconds(levelLoadTime);
+        
+        int randomLevel = Random.Range(0, levelList.Count);
+        SceneManager.LoadScene(levelList[randomLevel]);
     }
 }
