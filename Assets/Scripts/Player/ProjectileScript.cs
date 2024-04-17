@@ -27,7 +27,6 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision with: " + collision.transform.name);
         if (collision.gameObject.TryGetComponent<KnockBackHandler>(out KnockBackHandler hit))
         {
             Vector3 dir = rb.velocity.normalized;
