@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class KnockBackHandler : MonoBehaviour
 {
     private Rigidbody rb;
@@ -23,12 +24,12 @@ public class KnockBackHandler : MonoBehaviour
         {
             if (rb.velocity.sqrMagnitude > 0)
             {
-                DeacceleratePlayer();
+                Deaccelerate();
             }
         }
     }
 
-    public void DeacceleratePlayer()
+    public void Deaccelerate()
     {
         rb.velocity -= frictionCoefficient * Time.deltaTime * rb.velocity.normalized;
         if (rb.velocity.sqrMagnitude < 1f) // Check if velocity is close to zero
@@ -38,19 +39,15 @@ public class KnockBackHandler : MonoBehaviour
             {
                 myMovement.enabled = true;
                 knockedBack = false;
-                Debug.Log("Player movement enabled");
             }
         }
     }
 
     public void GetKnockedBack(Vector3 dir, float force)
     {
-        Debug.Log("Knocked back!");
-
         if(TryGetComponent<Movement>(out Movement myMovement))
         {
             myMovement.enabled = false;
-            Debug.Log("Player movement disabled");
         }
 
         knockedBack = true;

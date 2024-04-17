@@ -28,6 +28,7 @@ public class PlayerShooting : MonoBehaviour
     {
         // Calculate spawn position in front of the player
         Vector3 spawnPosition = shootPoint.position + shootPoint.forward * spawnDistance;
+        spawnPosition.y += 1;
 
         // Calculate spawn rotation with +90 degrees offset
         Quaternion spawnRotation = shootPoint.rotation * Quaternion.Euler(0, 0, 0);
