@@ -31,12 +31,6 @@ public class WeaponUser : MonoBehaviour
         {
             UpdateCarriedWeaponPosition();
         }
-
-        /*  WEAPON DROP
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DropWeapon();
-        }*/
     }
 
     void OnTriggerEnter(Collider other)
@@ -81,19 +75,4 @@ public class WeaponUser : MonoBehaviour
             weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
         }
     }
-
-    /*   DROPPING WEAPON
-    public void DropWeapon()
-    {
-        if (inventory.Count > 0)
-        {
-            Weapon lastWeapon = inventory[inventory.Count - 1];
-            Vector3 dropPosition = transform.position + transform.forward * 1f; 
-
-            lastWeapon.gameObject.SetActive(true);
-            lastWeapon.transform.position = dropPosition;
-
-            inventory.Remove(lastWeapon);
-        }
-    }*/
 }
