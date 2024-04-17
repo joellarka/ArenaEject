@@ -59,7 +59,9 @@ public class WeaponUser : MonoBehaviour
 
     private void TryFireWeapon()
     {
-        Debug.Log("Attempt fire!");
+        if (carriedWeapon == null) return;
+
+        carriedWeapon.TryShoot();
     }
 
     public void PickupWeapon()
