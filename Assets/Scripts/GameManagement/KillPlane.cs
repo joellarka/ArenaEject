@@ -98,10 +98,20 @@ public class KillPlane : MonoBehaviour
         
         int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex;
-        
+
+        int counter = 0;
         do
         {
             nextSceneIndex = Random.Range(0, sceneIndex);
+            counter++;
+            if (counter > 20)
+            {
+                Debug.Log("No new levels available in build settings. Reloading current level...");
+                yield return new WaitForSeconds(levelLoadTime);
+                
+                SceneManager.LoadScene(currentLevelIndex);
+                yield break;
+            }
         } while (nextSceneIndex == currentLevelIndex || avoidedSceneIndex.Contains(nextSceneIndex));
         
         Debug.Log("Loading next level in 3 seconds...");
