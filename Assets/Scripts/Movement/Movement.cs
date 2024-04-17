@@ -24,9 +24,26 @@ public class Movement : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0/*rb.velocity.y*/, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
+        if(appropriatlySpawned)
+        {
+            float x = Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo");
+            float y = 0;
+            float z = Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f;
+
+            if (Mathf.Abs(x) < 0.2f) x = 0;
+            if (Mathf.Abs(z) < 0.2f) z = 0;
+
+            rawInput = new Vector3(x,y,z);
+        }
         else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), 0/*rb.velocity.y*/, Input.GetAxisRaw("Vertical")).normalized;
 
+
+
+        if(controllerIndex == 2)
+        {
+            Debug.Log(rawInput);
+
+        }
 
         Vector3 perservedFallingVelocity = rb.velocity;
 

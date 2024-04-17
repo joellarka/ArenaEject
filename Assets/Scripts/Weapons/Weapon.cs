@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     [SerializeField] protected int ammoCount = 1;
     [SerializeField] protected float fireRate = 0.5f;
+    private float fireTimer = 0;
     [SerializeField] protected bool weaponDeterminesAmmoSpeed = true;
     [SerializeField] protected float ammoSpeed = 3f;
 
@@ -19,7 +20,7 @@ public class Weapon : MonoBehaviour
         if (ammoCount <= 0) return false;
         if (ammoTypePrefab == null) return false;
         if (firePoint == null) return false;
-        if (Time.time <= fireRate) return false;
+        if (Time.time <= fireTimer) return false;
         
         Shoot();
         return true;
@@ -27,7 +28,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void Shoot()
     {
-        fireRate = Time.time + fireRate;
+        fireTimer = Time.time + fireRate;
         ammoCount--;
 
         GameObject projectileObj = Instantiate(ammoTypePrefab, firePoint.position, Quaternion.identity).gameObject;

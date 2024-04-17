@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerIndex: 1
   appropriatlySpawned: 0
+  carriedWeaponTransform: {fileID: 0}
+  inventory: []
   carriedWeapon: {fileID: 1546633073835392729}
 --- !u!54 &-4713559047619484691
 Rigidbody:
@@ -219,6 +221,18 @@ PrefabInstance:
     - target: {fileID: 4398090638825381503, guid: 9a619b2ed5fe78640a6a6faca902f387, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341555756347850958, guid: 9a619b2ed5fe78640a6a6faca902f387, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341555756347850958, guid: 9a619b2ed5fe78640a6a6faca902f387, type: 3}
+      propertyPath: ammoCount
+      value: 999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341555756347850958, guid: 9a619b2ed5fe78640a6a6faca902f387, type: 3}
+      propertyPath: ammoSpeed
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
