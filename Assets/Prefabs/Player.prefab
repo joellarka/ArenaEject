@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: -420792866870573810}
   - component: {fileID: 3575394810099702661}
   - component: {fileID: 209684254705093327}
+  - component: {fileID: 2782248709497289612}
+  - component: {fileID: -5137444874030891988}
   - component: {fileID: -4713559047619484691}
   - component: {fileID: 8277015850034542796}
+  - component: {fileID: 1046844940942820756}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -88,6 +91,35 @@ MonoBehaviour:
   appropriatlySpawned: 0
   controllerIndex: 1
   rotationSpeedRads: 1
+--- !u!114 &2782248709497289612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455113739012497393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24181474b91f07e4392efff36f109b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frictionCoefficient: 5
+  frictionDelay: 5
+--- !u!114 &-5137444874030891988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455113739012497393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d905abe9e5b732e44932f5e523b1b7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerIndex: 1
+  appropriatlySpawned: 0
+  carriedWeapon: {fileID: 0}
 --- !u!54 &-4713559047619484691
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,6 +168,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.41426492, y: 1.945233, z: 0.23571679}
   m_Center: {x: 0.007267475, y: 0.9591002, z: -0.03874603}
+--- !u!114 &1046844940942820756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455113739012497393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf344ecb2ab6aa4bb4e2308ecc773c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 377968644918356483, guid: 8680688ddb2057748a544eb3f3ea3e90, type: 3}
+  shootPoint: {fileID: 7336916088099221024}
+  shootForce: 25
+  fireRate: 0.5
+  spawnDistance: 1
 --- !u!1001 &7909097951125272173
 PrefabInstance:
   m_ObjectHideFlags: 0

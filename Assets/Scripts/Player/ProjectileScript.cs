@@ -7,10 +7,11 @@ public class Projectile : MonoBehaviour
     public float knockbackForce = 15f;
     public float knockbackDuration = 0.5f;
 
-    private Rigidbody playerRb; // Reference to the player's rigidbody
+    private Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         StartCoroutine(DestroyAfterDelay());
     }
 
@@ -24,18 +25,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        /*if (collision.gameObject.CompareTag("Player") && playerRb == null)
-        {
-            playerRb = collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 knockbackDirection = collision.contacts[0].normal;
-            playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-        }*/
+        Debug.Log("Collision with: " + collision.transform.name);
         if (collision.gameObject.TryGetComponent<KnockBackHandler>(out KnockBackHandler hit))
         {
-            //Vector3 knockbackDirection = collision.contacts[0].normal;
-            Vector3 dir = this.transform.position - collision.transform.position;
+            Vector3 dir = rb.velocity.normalized;
             dir.y = 0;
             hit.GetKnockedBack(dir, knockbackForce);
         }

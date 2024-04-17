@@ -392,6 +392,8 @@ MonoBehaviour:
   - {fileID: 1237217948}
   gameOverScreen: {fileID: 1638927626}
   gameOverText: {fileID: 1263447098}
+  levelLoadTime: 3
+  levels: []
 --- !u!4 &565193435
 Transform:
   m_ObjectHideFlags: 0
@@ -1270,7 +1272,7 @@ GameObject:
   - component: {fileID: 2132486381}
   - component: {fileID: 2132486380}
   - component: {fileID: 2132486379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlaceHolder Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

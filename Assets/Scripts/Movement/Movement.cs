@@ -37,8 +37,8 @@ public class Movement : MonoBehaviour
         else
         {
             // Deceleration
-            //rb.velocity -= acceleration * maxSpeed * Time.deltaTime * rb.velocity.normalized;
-            //if (rb.velocity.sqrMagnitude < 0.01) rb.velocity = Vector2.zero;
+            rb.velocity -= acceleration * maxSpeed * Time.deltaTime * rb.velocity.normalized;
+            if (rb.velocity.sqrMagnitude < 0.01) rb.velocity = Vector2.zero;
         }
     }
 }
