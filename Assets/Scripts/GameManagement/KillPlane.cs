@@ -106,7 +106,7 @@ public class KillPlane : MonoBehaviour
             counter++;
             if (counter > 20)
             {
-                Debug.Log("No new levels available in build settings. Reloading current level...");
+                Debug.Log("This level is the only one available in the builds settings. Reloading current level...");
                 yield return new WaitForSeconds(levelLoadTime);
                 
                 SceneManager.LoadScene(currentLevelIndex);
