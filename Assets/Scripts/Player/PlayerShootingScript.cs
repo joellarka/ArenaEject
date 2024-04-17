@@ -16,6 +16,12 @@ public class PlayerShooting : MonoBehaviour
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
+
+        if (Input.GetButtonDown("P1_Fire_Duo") && Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + fireRate;
+        }
     }
 
     void Shoot()

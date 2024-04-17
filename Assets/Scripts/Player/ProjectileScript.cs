@@ -26,12 +26,20 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && playerRb == null)
+        /*if (collision.gameObject.CompareTag("Player") && playerRb == null)
         {
             playerRb = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 knockbackDirection = collision.contacts[0].normal;
             playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+        }*/
+        if (collision.gameObject.TryGetComponent<KnockBackHandler>(out KnockBackHandler hit))
+        {
+            //Vector3 knockbackDirection = collision.contacts[0].normal;
+            Vector3 dir = this.transform.position - collision.transform.position;
+            dir.y = 0;
+            hit.GetKnockedBack(dir, knockbackForce);
         }
+
         Destroy(gameObject);
     }
 }

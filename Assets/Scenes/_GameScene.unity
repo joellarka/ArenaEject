@@ -1226,7 +1226,7 @@ MonoBehaviour:
   - {fileID: 568745677}
   - {fileID: 1661291280}
   - {fileID: 1237217948}
-  playersToSpawn: 1
+  playersToSpawn: 3
 --- !u!1 &1884781064
 GameObject:
   m_ObjectHideFlags: 0

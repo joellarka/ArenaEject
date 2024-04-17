@@ -24,12 +24,13 @@ public class Movement : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0/*rb.velocity.y*/, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
+        if(appropriatlySpawned) rawInput = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), rb.velocity.y, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f);
         else rawInput = new Vector3(Input.GetAxisRaw($"Horizontal"), rb.velocity.y, Input.GetAxisRaw("Vertical")).normalized;
 
         // Acceleration
         if (rawInput != Vector3.zero)
         {
+            
             rb.velocity += acceleration * maxSpeed * Time.deltaTime * rawInput;
             if (rb.velocity.sqrMagnitude > maxSpeed * maxSpeed) rb.velocity = rb.velocity.normalized * maxSpeed;
         }

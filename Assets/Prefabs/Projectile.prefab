@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelay: 3
-  knockbackForce: 15
+  knockbackForce: 50
   knockbackDuration: 0.5
 --- !u!54 &5025870226158059827
 Rigidbody:
