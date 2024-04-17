@@ -7,13 +7,53 @@ public class WeaponUser : MonoBehaviour
     [HideInInspector] public int controllerIndex = 1;
     [HideInInspector] public bool appropriatlySpawned = false;
 
-    public Weapon carriedWeapon;
+    public Transform carriedWeaponTransform; 
 
-    private void Update()
+    public List<Weapon> inventory = new List<Weapon>();
+    private bool isNearWeapon = false;
+    private Weapon carriedWeapon;
+    private Weapon nearbyWeapon;
+    private Vector3 carriedWeaponOffset;
+
+    void Update()
     {
-        if(Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
+        if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
         {
             TryFireWeapon();
+        }
+
+        if (isNearWeapon && Input.GetKeyDown(KeyCode.E))
+        {
+            PickupWeapon();
+        }
+
+        if(inventory.Count > 0)
+        {
+            UpdateCarriedWeaponPosition();
+        }
+
+        /*  WEAPON DROP
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropWeapon();
+        }*/
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            isNearWeapon = true;
+            nearbyWeapon = other.GetComponent<Weapon>();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            isNearWeapon = false;
+            nearbyWeapon = null;
         }
     }
 
@@ -21,4 +61,39 @@ public class WeaponUser : MonoBehaviour
     {
         Debug.Log("Attempt fire!");
     }
+
+    public void PickupWeapon()
+    {
+        if (nearbyWeapon != null)
+        {
+            inventory.Add(nearbyWeapon);
+            nearbyWeapon.transform.SetParent(transform);
+            nearbyWeapon.transform.localPosition = Vector3.zero;
+            nearbyWeapon.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        }
+    }
+
+    private void UpdateCarriedWeaponPosition()
+    {
+        foreach (Weapon weapon in inventory)
+        {
+            carriedWeaponOffset = new Vector3(0.6f, 1f, 1);
+            weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
+        }
+    }
+
+    /*   DROPPING WEAPON
+    public void DropWeapon()
+    {
+        if (inventory.Count > 0)
+        {
+            Weapon lastWeapon = inventory[inventory.Count - 1];
+            Vector3 dropPosition = transform.position + transform.forward * 1f; 
+
+            lastWeapon.gameObject.SetActive(true);
+            lastWeapon.transform.position = dropPosition;
+
+            inventory.Remove(lastWeapon);
+        }
+    }*/
 }
