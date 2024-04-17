@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.038734667, y: 0.034124, z: 0.5561855}
+  m_LocalScale: {x: 1.4145525, y: 0.1, z: 0.170943}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,9 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelay: 3
-  knockbackForce: 5
+  knockbackForce: 15
   knockbackDuration: 0.5
-  frictionCoefficient: 100
 --- !u!54 &5025870226158059827
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,4 +148,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
