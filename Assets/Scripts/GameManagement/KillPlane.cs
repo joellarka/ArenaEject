@@ -18,6 +18,8 @@ public class KillPlane : MonoBehaviour
     [Header("Temp")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TMP_Text gameOverText;
+    [SerializeField] private TMP_Text gameOverWinnerText;
+    [SerializeField] private TMP_Text gameOverResultsText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameOverLoadingText;
     
@@ -27,11 +29,6 @@ public class KillPlane : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
-    }
-
-    private void Start()
-    {
-        gameOverText.transform.localScale = Vector3.zero;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -98,7 +95,7 @@ public class KillPlane : MonoBehaviour
         gameIsOver = true;
         Time.timeScale = 0.2f;
         
-        ShowEndGamePanel();
+        ShowEndGamePanel(winner.playerIndex);
     }
     
     private void EndGameTie()
@@ -107,19 +104,40 @@ public class KillPlane : MonoBehaviour
         gameIsOver = true;
         Time.timeScale = 0.2f;
 
-        ShowEndGamePanel();
+        ShowEndGamePanel(0);
     }
 
-    private void ShowEndGamePanel()
+    private void ShowEndGamePanel(int winnerIndex)
     {
         gameOverScreen.SetActive(true);
         gameOverText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
         DOVirtual.DelayedCall(0.4f, () =>
         {
-            gameOverPanel.transform.DOScale(1, 0.2f).SetEase(Ease.OutQuart);
+            gameOverPanel.transform.DOScale(1, 0.2f).SetEase(Ease.OutQuart).onComplete += () =>
+            {
+                if (winnerIndex == 0)
+                {
+                    // gameOverWinnerText.text = "Tie!";
+                    gameOverWinnerText.text = "Player " + winnerIndex + " Wins!";
+                }
+                else
+                {
+                    gameOverWinnerText.text = "Player " + winnerIndex + " Wins!";
+                }
+                
+                gameOverWinnerText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
+                
+                DOVirtual.DelayedCall(0.5f, () =>
+                {
+                    gameOverResultsText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
+                });
+                
+                DOVirtual.DelayedCall(1f, () =>
+                {
+                    StartCoroutine(ChangeLevel(new List<int> {0, 1}));
+                });
+            };
         });
-        
-        StartCoroutine(ChangeLevel(new List<int> {0, 1}));
     }
     
     private IEnumerator ChangeLevel(List<int> avoidedSceneIndex)

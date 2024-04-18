@@ -39,12 +39,6 @@ public class Movement : MonoBehaviour
 
 
 
-        if(controllerIndex == 2)
-        {
-            Debug.Log(rawInput);
-
-        }
-
         Vector3 perservedFallingVelocity = rb.velocity;
 
         // Acceleration
