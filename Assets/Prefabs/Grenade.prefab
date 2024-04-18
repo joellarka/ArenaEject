@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6353264082119806985}
   - component: {fileID: 8111827181570111957}
   - component: {fileID: 7372905201102629228}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Grenade
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3453568059365731563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.56867, y: 0.56867, z: 0.56867}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -103,7 +103,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -166,7 +166,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7372905201102629228
 MonoBehaviour:
@@ -183,4 +183,5 @@ MonoBehaviour:
   explosionRadius: 5
   explosionForce: 3000
   explosionUpForce: 10
+  duration: 0.1
   explosionPrefab: {fileID: 6860196289586296487, guid: 9099636871efcab4588408f9424438a1, type: 3}

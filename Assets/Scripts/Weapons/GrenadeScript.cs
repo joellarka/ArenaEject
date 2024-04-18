@@ -10,6 +10,7 @@ public class GrenadeScript : MonoBehaviour
     private Rigidbody rb;
     private MonoBehaviour explosion;
     private MeshRenderer rbMesh;
+    private int collisionCounter = 0;
 
     void Start()
     {
@@ -26,7 +27,6 @@ public class GrenadeScript : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
-        FreezeYPosition();
     }
 
     void Update()
@@ -39,6 +39,8 @@ public class GrenadeScript : MonoBehaviour
                 DropWeapon();
             }
         }
+
+        Debug.Log(collisionCounter);
     }
 
     void FreezeYPosition()
@@ -76,6 +78,7 @@ public class GrenadeScript : MonoBehaviour
             UnfreezeYPosition();
 
             Rigidbody grenadeRb = lastWeapon.GetComponent<Rigidbody>();
+            
             if(grenadeRb != null)
             {
                 BoxCollider collider = GetComponent<BoxCollider>();
@@ -86,14 +89,6 @@ public class GrenadeScript : MonoBehaviour
                 gameObject.transform.SetParent(null);
                 collider.isTrigger = false;
                 explosion.enabled = true;
-                
-                if(TryGetComponent<Explosion>(out Explosion myExplosion))
-                {
-                    if(myExplosion != null)
-                    {
-                        
-                    }
-                }
             }
 
             weaponUser.inventory.Remove(lastWeapon);
@@ -104,8 +99,20 @@ public class GrenadeScript : MonoBehaviour
     {
         if(collision != null)
         {
-            rbMesh.enabled = false;
-            DestroyAfterDuration();
+            collisionCounter += 1;
+
+            if(collisionCounter > 1)
+            {
+                rbMesh.enabled = false;
+                StartCoroutine(DestroyAfterDuration());
+                collisionCounter = 0;
+            }
+            else
+            {
+                FreezeYPosition();
+                BoxCollider myCollider = GetComponent<BoxCollider>();
+                myCollider.isTrigger = true;
+            }
         }
     }
 
