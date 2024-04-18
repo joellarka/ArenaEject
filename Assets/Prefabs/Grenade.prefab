@@ -121,6 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d33a8cca62a8040af3c2936205c5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoTypePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  ammoCount: 1
+  fireRate: 0.5
+  weaponDeterminesAmmoSpeed: 1
+  ammoSpeed: 3
 --- !u!114 &6353264082119806985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +183,4 @@ MonoBehaviour:
   explosionRadius: 5
   explosionForce: 3000
   explosionUpForce: 10
+  explosionPrefab: {fileID: 6860196289586296487, guid: 9099636871efcab4588408f9424438a1, type: 3}

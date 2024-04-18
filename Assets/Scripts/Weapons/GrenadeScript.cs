@@ -9,10 +9,12 @@ public class GrenadeScript : MonoBehaviour
 
     private Rigidbody rb;
     private MonoBehaviour explosion;
+    private MeshRenderer rbMesh;
 
     void Start()
     {
         explosion = GetComponent<Explosion>();
+        rbMesh = GetComponent<MeshRenderer>();
 
         if(explosion != null)
         {
@@ -41,13 +43,11 @@ public class GrenadeScript : MonoBehaviour
 
     void FreezeYPosition()
     {
-        // Set constraints to freeze position in the Y axis only
         rb.constraints = RigidbodyConstraints.FreezePositionY;
     }
 
     void UnfreezeYPosition()
     {
-        // Remove constraints to allow movement in the Y axis
         rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
     }
 
@@ -86,6 +86,14 @@ public class GrenadeScript : MonoBehaviour
                 gameObject.transform.SetParent(null);
                 collider.isTrigger = false;
                 explosion.enabled = true;
+                
+                if(TryGetComponent<Explosion>(out Explosion myExplosion))
+                {
+                    if(myExplosion != null)
+                    {
+                        
+                    }
+                }
             }
 
             weaponUser.inventory.Remove(lastWeapon);
@@ -96,7 +104,14 @@ public class GrenadeScript : MonoBehaviour
     {
         if(collision != null)
         {
-            Destroy(gameObject);
+            rbMesh.enabled = false;
+            DestroyAfterDuration();
         }
+    }
+
+    IEnumerator DestroyAfterDuration()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 }
