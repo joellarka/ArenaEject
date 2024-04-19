@@ -45,8 +45,6 @@ public class GrenadeScript : MonoBehaviour
                 DropWeapon(); 
             }
         }
-
-        Debug.Log("triggerInput: " + triggerInput);
     }
 
     void FreezeYPosition()
