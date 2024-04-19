@@ -819,7 +819,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 4
     joyNum: 1
   - serializedVersion: 3
     m_Name: P2_Fire_Duo
@@ -835,7 +835,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 4
     joyNum: 2
   - serializedVersion: 3
     m_Name: P3_Fire_Duo
@@ -851,7 +851,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 4
     joyNum: 3
   - serializedVersion: 3
     m_Name: P4_Fire_Duo
@@ -867,6 +867,6 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 9
+    axis: 4
     joyNum: 4
   m_UsePhysicalKeys: 1

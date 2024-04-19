@@ -59,7 +59,7 @@ public class Explosion : MonoBehaviour
         {
             float progress = (Time.time - explosionStartTime) / duration;
 
-            float scale = Mathf.Lerp(0f, explosionRadius, progress);
+            float scale = Mathf.Lerp(0f, explosionRadius * 2, progress);
             explosionObject.transform.localScale = new Vector3(scale, scale, scale);
         }
     }

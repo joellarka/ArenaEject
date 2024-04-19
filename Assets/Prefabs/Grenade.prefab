@@ -139,8 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1e035e5ed3bed4092c7bbeb3c8d952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenadeLaunchForce: 5
+  grenadeLaunchForce: 10
   grenadeUpwardForce: 5
+  triggerThreshold: 0.5
+  controllerIndex: 1
 --- !u!54 &8111827181570111957
 Rigidbody:
   m_ObjectHideFlags: 0

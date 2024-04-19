@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GrenadeScript : MonoBehaviour
 {
-    public float grenadeLaunchForce = 5f;
+    public float grenadeLaunchForce = 10f;
     public float grenadeUpwardForce = 5f;
+    public float triggerThreshold = 0.5f;
 
     private Rigidbody rb;
     private MonoBehaviour explosion;
     private MeshRenderer rbMesh;
     private int collisionCounter = 0;
+    [HideInInspector] public int controllerIndex = 1;
+
+    bool IsTriggerPressed = false;
 
     void Start()
     {
@@ -31,14 +35,18 @@ public class GrenadeScript : MonoBehaviour
 
     void Update()
     {
+        float triggerInput = Input.GetAxis($"P{controllerIndex}_Fire_Duo");
+
         if (CheckGrenade())
         {
             //WEAPON DROP
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetAxis($"P{controllerIndex}_Fire_Duo") > 0)
             {
-                DropWeapon();
+                DropWeapon(); 
             }
         }
+
+        Debug.Log("triggerInput: " + triggerInput);
     }
 
     void FreezeYPosition()

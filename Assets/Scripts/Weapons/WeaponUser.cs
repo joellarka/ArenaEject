@@ -7,25 +7,23 @@ public class WeaponUser : MonoBehaviour
     [HideInInspector] public int controllerIndex = 1;
     [HideInInspector] public bool appropriatlySpawned = false;
 
-    public Transform carriedWeaponTransform; 
+    public Transform carriedWeaponTransform;
 
     public List<Weapon> inventory = new List<Weapon>();
     private bool isNearWeapon = false;
     public Weapon carriedWeapon;
     private Weapon nearbyWeapon;
     private Vector3 carriedWeaponOffset;
+    private float nextFireTime = 0f;
+    public float fireRate = 0.5f;
 
     void Update()
     {
-        if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
+        /*if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
         {
             TryFireWeapon();
-        }
-
-        if (isNearWeapon && Input.GetKeyDown(KeyCode.E))
-        {
-            PickupWeapon();
-        }
+            nextFireTime = Time.time + fireRate;
+        }*/
 
         if(inventory.Count > 0)
         {
@@ -39,6 +37,7 @@ public class WeaponUser : MonoBehaviour
         {
             isNearWeapon = true;
             nearbyWeapon = other.GetComponent<Weapon>();
+            PickupWeapon();
         }
     }
 

@@ -16,33 +16,30 @@ public class PlayerShooting : MonoBehaviour
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
-
-        if (Input.GetButtonDown("P1_Fire_Duo") && Time.time >= nextFireTime)
-        {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
-        }
     }
 
     void Shoot()
     {
         // Calculate spawn position in front of the player
-        Vector3 spawnPosition = shootPoint.position + shootPoint.forward * spawnDistance;
+        Vector3 spawnPosition = shootPoint.position + transform.forward * spawnDistance;
         spawnPosition.y += 1;
 
-        // Calculate spawn rotation with +90 degrees offset
-        Quaternion spawnRotation = shootPoint.rotation * Quaternion.Euler(0, 0, 0);
-
-        // Instantiate the projectile at the calculated position and rotation
-        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation);
+        // Instantiate the projectile at the calculated position
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
         // Get the Rigidbody component of the projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-        // Apply force to the projectile
+        // Calculate the direction the projectile should travel
+        Vector3 shootDirection = transform.forward;
+
+        // Apply force to the projectile in the calculated direction
         if (rb != null)
         {
-            rb.AddForce(shootPoint.forward * shootForce, ForceMode.Impulse);
+            rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
         }
+
+        // Set the rotation of the projectile to match the shoot direction
+        projectile.transform.rotation = Quaternion.LookRotation(shootDirection);
     }
 }
