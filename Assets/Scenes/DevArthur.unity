@@ -349,23 +349,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7336916088099221024, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
   m_PrefabInstance: {fileID: 972930024}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &702052296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702052290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf344ecb2ab6aa4bb4e2308ecc773c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 377968644918356483, guid: 8680688ddb2057748a544eb3f3ea3e90, type: 3}
-  shootPoint: {fileID: 972930025}
-  shootForce: 25
-  fireRate: 0.5
-  spawnDistance: 1
 --- !u!54 &702052297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -767,19 +750,11 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3455113739012497393, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 702052296}
-    - targetCorrespondingSourceObject: {fileID: 3455113739012497393, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 702052297}
     - targetCorrespondingSourceObject: {fileID: 3455113739012497393, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 702052302}
   m_SourcePrefab: {fileID: 100100000, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
---- !u!4 &972930025 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9108880853185440271, guid: 3032b651741b2de4faa78a1f7a12b8a3, type: 3}
-  m_PrefabInstance: {fileID: 972930024}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520271004
 GameObject:
   m_ObjectHideFlags: 0

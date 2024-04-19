@@ -72,8 +72,11 @@ public class WeaponUser : MonoBehaviour
     {
         foreach (Weapon weapon in inventory)
         {
-            carriedWeaponOffset = new Vector3(0.6f, 1f, 1);
-            weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
+            if(weapon != null)
+            {
+                carriedWeaponOffset = new Vector3(0.6f, 1f, 1);
+                weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
+            }
         }
     }
 }

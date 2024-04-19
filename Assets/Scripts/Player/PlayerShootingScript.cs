@@ -9,9 +9,11 @@ public class PlayerShooting : MonoBehaviour
     public float spawnDistance = 1.0f; // Adjust this distance as needed
     private float nextFireTime = 0f;
 
+    [HideInInspector] public int controllerIndex = 1;
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
+        if (Input.GetButtonDown($"Fire{controllerIndex}") && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
