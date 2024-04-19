@@ -175,6 +175,7 @@ public class KillPlane : MonoBehaviour
                             shotsFiredPlayerFourText = entry.Value + " shots fired";
                         }
                     }
+                    
                     gameOverWinnerShotsFiredText.text = shotsFiredWinnerText;
                     gameOverPlayerTwoShotsFiredText.text = shotsFiredPlayerTwoText;
                     gameOverPlayerThreeShotsFiredText.text = shotsFiredPlayerThreeText;
@@ -182,19 +183,19 @@ public class KillPlane : MonoBehaviour
                 
                     DOVirtual.DelayedCall(1f, () =>
                     {
-                        gameOverWinnerShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                        gameOverWinnerShotsFiredText.transform.DOScale(1f, 0.2f).SetEase(Ease.OutElastic);
                     });
                     DOVirtual.DelayedCall(1.1f, () =>
                     {
-                        gameOverPlayerTwoShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                        gameOverPlayerTwoShotsFiredText.transform.DOScale(1f, 0.2f).SetEase(Ease.OutElastic);
                     });
                     DOVirtual.DelayedCall(1.2f, () =>
                     {
-                        gameOverPlayerThreeShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                        gameOverPlayerThreeShotsFiredText.transform.DOScale(1f, 0.2f).SetEase(Ease.OutElastic);
                     });
                     DOVirtual.DelayedCall(1.3f, () =>
                     {
-                        gameOverPlayerFourShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                        gameOverPlayerFourShotsFiredText.transform.DOScale(1f, 0.2f).SetEase(Ease.OutElastic);
                     });
                 
                     DOVirtual.DelayedCall(2f, () =>
