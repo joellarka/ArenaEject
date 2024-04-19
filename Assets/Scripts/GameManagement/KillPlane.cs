@@ -17,9 +17,15 @@ public class KillPlane : MonoBehaviour
 
     [Header("Temp")]
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private TMP_Text gameOverText;
     [SerializeField] private TMP_Text gameOverWinnerText;
-    [SerializeField] private TMP_Text gameOverResultsText;
+    [SerializeField] private GameObject gameOverWinnerAvatar;
+    [SerializeField] private GameObject gameOverPlayerTwoAvatar;
+    [SerializeField] private GameObject gameOverPlayerThreeAvatar;
+    [SerializeField] private GameObject gameOverPlayerFourAvatar;
+    [SerializeField] private TMP_Text gameOverWinnerShotsFiredText;
+    [SerializeField] private TMP_Text gameOverPlayerTwoShotsFiredText;
+    [SerializeField] private TMP_Text gameOverPlayerThreeShotsFiredText;
+    [SerializeField] private TMP_Text gameOverPlayerFourShotsFiredText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameOverLoadingText;
     
@@ -109,12 +115,12 @@ public class KillPlane : MonoBehaviour
 
     private void ShowEndGamePanel(int winnerIndex)
     {
+        // Aktivera panelen
         gameOverScreen.SetActive(true);
-        gameOverText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
         DOVirtual.DelayedCall(0.4f, () =>
         {
-            gameOverPanel.transform.DOScale(1, 0.2f).SetEase(Ease.OutQuart).onComplete += () =>
             {
+                // Bestäm vinnare
                 if (winnerIndex == 0)
                 {
                     // gameOverWinnerText.text = "Tie!";
@@ -124,17 +130,77 @@ public class KillPlane : MonoBehaviour
                 {
                     gameOverWinnerText.text = "Player " + winnerIndex + " Wins!";
                 }
-                
+
+                // Namn animation
                 gameOverWinnerText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
-                
+
+                // Panel animation
                 DOVirtual.DelayedCall(0.5f, () =>
                 {
-                    gameOverResultsText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
-                });
+                    gameOverPanel.transform.DOScale(1, 0.2f).SetEase(Ease.OutQuart).onComplete += () =>
+                        gameOverWinnerText.transform.DOScale(1, 0.2f).SetEase(Ease.OutElastic);
+                    
+                    // Avatar animation
+                    DOVirtual.DelayedCall(0.5f,
+                        () => { gameOverWinnerAvatar.transform.DOScale(2, 0.2f).SetEase(Ease.OutElastic); });
+                    DOVirtual.DelayedCall(0.6f,
+                        () => { gameOverPlayerTwoAvatar.transform.DOScale(2, 0.2f).SetEase(Ease.OutElastic); });
+                    DOVirtual.DelayedCall(0.7f,
+                        () => { gameOverPlayerThreeAvatar.transform.DOScale(2, 0.2f).SetEase(Ease.OutElastic); });
+                    DOVirtual.DelayedCall(0.8f,
+                        () => { gameOverPlayerFourAvatar.transform.DOScale(2, 0.2f).SetEase(Ease.OutElastic); });
+                    
+                    // Avfyrade skott animation
+                    string shotsFiredWinnerText = "";
+                    string shotsFiredPlayerTwoText = "";
+                    string shotsFiredPlayerThreeText = "";
+                    string shotsFiredPlayerFourText = "";
+                    
+                    foreach (var entry in PlayerShooting.shotsFiredPerPlayer)
+                    {
+                        if (entry.Key == 1)
+                        {
+                            shotsFiredWinnerText = entry.Value + " shots fired";
+                        }
+                        else if (entry.Key == 2)
+                        {
+                            shotsFiredPlayerTwoText = entry.Value + " shots fired";
+                        }
+                        else if (entry.Key == 3)
+                        {
+                            shotsFiredPlayerThreeText = entry.Value + " shots fired";
+                        }
+                        else if (entry.Key == 4)
+                        {
+                            shotsFiredPlayerFourText = entry.Value + " shots fired";
+                        }
+                    }
+                    gameOverWinnerShotsFiredText.text = shotsFiredWinnerText;
+                    gameOverPlayerTwoShotsFiredText.text = shotsFiredPlayerTwoText;
+                    gameOverPlayerThreeShotsFiredText.text = shotsFiredPlayerThreeText;
+                    gameOverPlayerFourShotsFiredText.text = shotsFiredPlayerFourText;
                 
-                DOVirtual.DelayedCall(1f, () =>
-                {
-                    StartCoroutine(ChangeLevel(new List<int> {0, 1}));
+                    DOVirtual.DelayedCall(1f, () =>
+                    {
+                        gameOverWinnerShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                    });
+                    DOVirtual.DelayedCall(1.1f, () =>
+                    {
+                        gameOverPlayerTwoShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                    });
+                    DOVirtual.DelayedCall(1.2f, () =>
+                    {
+                        gameOverPlayerThreeShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                    });
+                    DOVirtual.DelayedCall(1.3f, () =>
+                    {
+                        gameOverPlayerFourShotsFiredText.transform.DOScale(0.5f, 0.2f).SetEase(Ease.OutElastic);
+                    });
+                
+                    DOVirtual.DelayedCall(2f, () =>
+                    {
+                        StartCoroutine(ChangeLevel(new List<int> {0, 1}));
+                    });
                 });
             };
         });
@@ -142,6 +208,8 @@ public class KillPlane : MonoBehaviour
     
     private IEnumerator ChangeLevel(List<int> avoidedSceneIndex)
     {
+        PlayerShooting.shotsFiredPerPlayer.Clear();
+        
         int sceneIndex = SceneManager.sceneCountInBuildSettings;
         
         int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
