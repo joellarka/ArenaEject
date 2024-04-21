@@ -49,7 +49,6 @@ public class Aiming : MonoBehaviour
                 targetDir = new Vector3(x, y, z);
             }
 
-            //input = new Vector3(Input.GetAxisRaw($"P{controllerIndex}_Horizontal_Duo"), 0, Input.GetAxisRaw($"P{controllerIndex}_Vertical_Duo") * -1f).normalized;
         }
         else
         {

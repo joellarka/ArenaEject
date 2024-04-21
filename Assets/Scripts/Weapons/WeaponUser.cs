@@ -19,11 +19,11 @@ public class WeaponUser : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
+        if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
         {
             TryFireWeapon();
             nextFireTime = Time.time + fireRate;
-        }*/
+        }
 
         if(inventory.Count > 0)
         {
@@ -55,6 +55,7 @@ public class WeaponUser : MonoBehaviour
         if (carriedWeapon == null) return;
 
         bool result = carriedWeapon.TryShoot();
+        Debug.Log(result);
     }
 
     public void PickupWeapon()
