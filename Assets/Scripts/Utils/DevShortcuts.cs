@@ -19,5 +19,15 @@ public class DevShortcuts : MonoBehaviour
 #endif
             Application.Quit();
         }
+
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

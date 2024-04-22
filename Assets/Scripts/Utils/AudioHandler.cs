@@ -38,6 +38,8 @@ public class AudioHandler : MonoBehaviour
 
         if (gameObject != null)
             SceneManager.sceneLoaded += delegate { PickMusic(); };
+    
+        DontDestroyOnLoad(gameObject);
     }
 
     public static void PlaySoundEffect(AudioClip clipToPlay)
@@ -102,11 +104,23 @@ public class AudioHandler : MonoBehaviour
 
     private void PickMusic()
     {
+        AudioClip prevClip = null;
+        if(musicPlayer!= null) { prevClip = musicPlayer.clip; }
+
         if (SceneManager.GetActiveScene().name == Paths.START_SCENE_NAME)
             music = Resources.Load<AudioClip>(Paths.START_MENU_MUSIC);
         else
             music = Resources.Load<AudioClip>(Paths.DEFAULT_GAMEPLAY_MUSIC);
 
+        if(music != prevClip)
+        {
+            if (musicPlayer == null) return;
+
+            musicPlayer.Stop();
+            musicPlayer.clip = music;
+            musicPlayer.loop = true;
+            musicPlayer.Play();
+        }
     }
 
     private void ExpandSorceCount(int amount)
