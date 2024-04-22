@@ -180,6 +180,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bd6fc3b78c12164abf8cf5405de0c0e, type: 3}
+--- !u!1001 &682684783
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.522547
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -24.17502
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
+      propertyPath: m_Name
+      value: shark_launcher2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2594f032e645ae841b70a08c3460fd40, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,3 +662,4 @@ SceneRoots:
   - {fileID: 2639621818519008103}
   - {fileID: 1470702420}
   - {fileID: 848825964}
+  - {fileID: 682684783}
