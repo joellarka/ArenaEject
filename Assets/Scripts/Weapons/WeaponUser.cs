@@ -54,8 +54,7 @@ public class WeaponUser : MonoBehaviour
     {
         if (carriedWeapon == null) return;
 
-        bool result = carriedWeapon.TryShoot();
-        Debug.Log(result);
+        _ = carriedWeapon.TryShoot();
     }
 
     public void PickupWeapon()

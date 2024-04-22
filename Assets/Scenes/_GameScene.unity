@@ -437,9 +437,15 @@ MonoBehaviour:
   - {fileID: 1661291280}
   - {fileID: 1237217948}
   gameOverScreen: {fileID: 1638927626}
-  gameOverText: {fileID: 1263447098}
   gameOverWinnerText: {fileID: 0}
-  gameOverResultsText: {fileID: 0}
+  gameOverWinnerAvatar: {fileID: 0}
+  gameOverPlayerTwoAvatar: {fileID: 0}
+  gameOverPlayerThreeAvatar: {fileID: 0}
+  gameOverPlayerFourAvatar: {fileID: 0}
+  gameOverWinnerShotsFiredText: {fileID: 0}
+  gameOverPlayerTwoShotsFiredText: {fileID: 0}
+  gameOverPlayerThreeShotsFiredText: {fileID: 0}
+  gameOverPlayerFourShotsFiredText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   gameOverLoadingText: {fileID: 0}
   levelLoadTime: 3
@@ -592,7 +598,7 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
