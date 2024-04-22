@@ -21,6 +21,11 @@ public class WeaponUser : MonoBehaviour
             TryFireWeapon();
         }
 
+        if (Input.GetButtonDown($"P{controllerIndex}_Toss"))
+        {
+            ThrowWeapon();
+        }
+
     }
 
     private void TryFireWeapon()
@@ -64,6 +69,16 @@ public class WeaponUser : MonoBehaviour
         weaponObj.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         carriedWeapon = weaponScr;
+    }
+
+    private void ThrowWeapon()
+    {
+        if (carriedWeapon == null) return;
+
+        // TODO: Throw a projectile with the model of the equiped weapon
+
+        Destroy(carriedWeapon.gameObject);
+        carriedWeapon = null;
     }
 
     #region Decrepit
