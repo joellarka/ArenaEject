@@ -72,6 +72,8 @@ public class GrenadeScript : MonoBehaviour
 
     public void DropWeapon()
     {
+        // Commented out, a grenade should not handle the player throwing away the launcher by itself
+
         /*WeaponUser weaponUser = GetComponentInParent<WeaponUser>();
 
         if (weaponUser.inventory.Count > 0)
