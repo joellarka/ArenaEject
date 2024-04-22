@@ -38,11 +38,14 @@ public class Explosion : MonoBehaviour
             timePassed += Time.deltaTime;
             yield return null;
         }
-
+        transform.localScale = endScale;
         Destroy(gameObject);
         yield return null;
     }
 
+
+
+    #region Decrepit
     /*void Explode()
     {
         if(canExplode)
@@ -93,9 +96,12 @@ public class Explosion : MonoBehaviour
         Destroy(explosionObject);
     }
 
-    void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }*/
+    }
+
+*/
+    #endregion
 }
