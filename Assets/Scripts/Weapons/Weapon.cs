@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // TODO:
-    // Model
-
     public Ammo ammoTypePrefab;
     public Transform firePoint;
-    [SerializeField] protected int ammoCount = 1;
+    public int ammoCount = 1;
     [SerializeField] protected float fireRate = 0.5f;
     private float fireTimer = 0;
     [SerializeField] protected bool weaponDeterminesAmmoSpeed = true;

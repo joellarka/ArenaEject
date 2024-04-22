@@ -72,7 +72,7 @@ public class GrenadeScript : MonoBehaviour
 
     public void DropWeapon()
     {
-        WeaponUser weaponUser = GetComponentInParent<WeaponUser>();
+        /*WeaponUser weaponUser = GetComponentInParent<WeaponUser>();
 
         if (weaponUser.inventory.Count > 0)
         {
@@ -98,7 +98,7 @@ public class GrenadeScript : MonoBehaviour
             }
 
             weaponUser.inventory.Remove(lastWeapon);
-        }
+        }*/
     }
 
     private void OnCollisionEnter(Collision collision)

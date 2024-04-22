@@ -2,52 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponUser : MonoBehaviour
+public class WeaponUser : MonoBehaviour 
 {
     [HideInInspector] public int controllerIndex = 1;
     [HideInInspector] public bool appropriatlySpawned = false;
 
+
+    [SerializeField] private Transform weaponCarryPoint;
     public Transform carriedWeaponTransform;
 
-    public List<Weapon> inventory = new List<Weapon>();
-    private bool isNearWeapon = false;
-    public Weapon carriedWeapon;
-    private Weapon nearbyWeapon;
-    private Vector3 carriedWeaponOffset;
-    private float nextFireTime = 0f;
-    public float fireRate = 0.5f;
+    public Weapon carriedWeapon = null;
+
 
     void Update()
     {
         if (Input.GetAxisRaw($"P{controllerIndex}_Fire_Duo") > 0.5f)
         {
             TryFireWeapon();
-            nextFireTime = Time.time + fireRate;
         }
 
-        if(inventory.Count > 0)
-        {
-            UpdateCarriedWeaponPosition();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Weapon"))
-        {
-            isNearWeapon = true;
-            nearbyWeapon = other.GetComponent<Weapon>();
-            PickupWeapon();
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Weapon"))
-        {
-            isNearWeapon = false;
-            nearbyWeapon = null;
-        }
     }
 
     private void TryFireWeapon()
@@ -56,6 +29,79 @@ public class WeaponUser : MonoBehaviour
 
         _ = carriedWeapon.TryShoot();
     }
+
+    public bool AttemptAquireWeapon(Weapon weaponPrefabToAquire)
+    {
+        if(carriedWeapon == null)
+        {
+            AquireWeapon(weaponPrefabToAquire);
+            return true;
+        }
+
+        if (carriedWeapon.ammoCount <= 0)
+        {
+            AquireWeapon(weaponPrefabToAquire);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void AquireWeapon(Weapon weaponPrefabToAquire)
+    {
+        if(carriedWeapon!= null)
+        {
+            Destroy(carriedWeapon.gameObject);
+            carriedWeapon = null;
+        }
+
+        GameObject weaponObj = Instantiate(weaponPrefabToAquire).gameObject;
+        Weapon weaponScr = weaponObj.GetComponent<Weapon>();
+        Transform weaponCarryParent;
+        if (weaponCarryPoint != null)   { weaponCarryParent = weaponCarryPoint; }
+        else                            { weaponCarryParent = transform; }
+        weaponObj.transform.SetParent(weaponCarryParent);
+        weaponObj.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+        carriedWeapon = weaponScr;
+    }
+
+    #region Decrepit
+    /*
+     
+    public List<Weapon> inventory = new List<Weapon>();
+    private bool isNearWeapon = false;
+    private Weapon nearbyWeapon;
+    private Vector3 carriedWeaponOffset;
+
+
+    void Update()
+    {
+
+        if(inventory.Count > 0)
+         {
+             UpdateCarriedWeaponPosition();
+         }
+    }
+    
+    void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Weapon"))
+    {
+        isNearWeapon = true;
+        nearbyWeapon = other.GetComponent<Weapon>();
+        PickupWeapon();
+    }
+}
+
+void OnTriggerExit(Collider other)
+{
+    if (other.CompareTag("Weapon"))
+    {
+        isNearWeapon = false;
+        nearbyWeapon = null;
+    }
+
 
     public void PickupWeapon()
     {
@@ -68,15 +114,16 @@ public class WeaponUser : MonoBehaviour
         }
     }
 
-    private void UpdateCarriedWeaponPosition()
-    {
-        foreach (Weapon weapon in inventory)
-        {
-            if(weapon != null)
-            {
-                carriedWeaponOffset = new Vector3(0.6f, 1f, 1);
-                weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
-            }
-        }
-    }
+     private void UpdateCarriedWeaponPosition()
+     {
+         foreach (Weapon weapon in inventory)
+         {
+             if(weapon != null)
+             {
+                 carriedWeaponOffset = new Vector3(0.6f, 1f, 1);
+                 weapon.transform.position = carriedWeaponTransform.position + carriedWeaponOffset;
+             }
+         }
+     }*/
+    #endregion
 }
