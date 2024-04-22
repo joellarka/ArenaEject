@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     private float fireTimer = 0;
     [SerializeField] protected bool weaponDeterminesAmmoSpeed = true;
     [SerializeField] protected float ammoSpeed = 3f;
+    [SerializeField] protected Vector3 ammoDirOffSet = Vector3.zero;
 
     public virtual bool TryShoot()
     {
@@ -32,7 +33,13 @@ public class Weapon : MonoBehaviour
         projectileObj.transform.forward = transform.forward;
 
         Ammo projectileScr = projectileObj.GetComponent<Ammo>();
-        projectileScr.moveDir = projectileObj.transform.forward;
+        Vector3 projectileDir = projectileObj.transform.forward;
+        ammoDirOffSet.Normalize();
+        projectileDir.x += ammoDirOffSet.x;
+        projectileDir.y += ammoDirOffSet.y;
+        projectileDir.z += ammoDirOffSet.z;
+        projectileDir.Normalize();
+        projectileScr.moveDir = projectileDir;
         if (weaponDeterminesAmmoSpeed)
         {
             projectileScr.moveSpeed = ammoSpeed;

@@ -107,7 +107,6 @@ public class AudioHandler : MonoBehaviour
         else
             music = Resources.Load<AudioClip>(Paths.DEFAULT_GAMEPLAY_MUSIC);
 
-        Debug.Log(music);
     }
 
     private void ExpandSorceCount(int amount)
