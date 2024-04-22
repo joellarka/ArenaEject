@@ -43,6 +43,7 @@ public class KillPlane : MonoBehaviour
 
         if(other.TryGetComponent<PlayerStats>(out PlayerStats player))
         {
+            Debug.Log("Player encountered");
             player.lives--;
 
             if (player.lives <= 0)
