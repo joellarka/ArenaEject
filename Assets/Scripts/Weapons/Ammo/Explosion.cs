@@ -1,27 +1,52 @@
+using System;
 using System.Collections;
+using TMPro.Examples;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public float explosionRadius = 5f;
-    public float explosionForce = 3000f;
-    public float explosionUpForce = 10f;
-    public float duration = 0.1f;
-    public GameObject explosionPrefab;
+    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private float explosionForce = 3000f;
+    [SerializeField] private float duration = 0.1f;
 
-    private bool canExplode = true;
-    private float explosionStartTime;
-    private GameObject explosionObject;
-
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision != null)
+        StartCoroutine(Explode());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.TryGetComponent<KnockBackHandler>(out KnockBackHandler kbh))
         {
-            Explode();
+            Vector3 dir = other.transform.position - transform.position;
+            dir.y = 0;
+            dir.Normalize();
+            kbh.GetKnockedBack(dir, explosionForce);
         }
     }
 
-    void Explode()
+    private IEnumerator Explode() {
+
+        float timePassed = 0;
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = Vector3.one * explosionRadius;
+
+        while (timePassed < duration)
+        {
+            transform.localScale = Vector3.Lerp(startScale, endScale, (timePassed / duration));
+
+            timePassed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = endScale;
+        Destroy(gameObject);
+        yield return null;
+    }
+
+
+
+    #region Decrepit
+    /*void Explode()
     {
         if(canExplode)
         {
@@ -71,9 +96,12 @@ public class Explosion : MonoBehaviour
         Destroy(explosionObject);
     }
 
-    void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
+
+*/
+    #endregion
 }

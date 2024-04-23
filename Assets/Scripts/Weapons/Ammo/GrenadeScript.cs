@@ -72,7 +72,9 @@ public class GrenadeScript : MonoBehaviour
 
     public void DropWeapon()
     {
-        WeaponUser weaponUser = GetComponentInParent<WeaponUser>();
+        // Commented out, a grenade should not handle the player throwing away the launcher by itself
+
+        /*WeaponUser weaponUser = GetComponentInParent<WeaponUser>();
 
         if (weaponUser.inventory.Count > 0)
         {
@@ -98,7 +100,7 @@ public class GrenadeScript : MonoBehaviour
             }
 
             weaponUser.inventory.Remove(lastWeapon);
-        }
+        }*/
     }
 
     private void OnCollisionEnter(Collision collision)

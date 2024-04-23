@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -18,6 +19,8 @@ public class PlayerShooting : MonoBehaviour
     {
         playerPrefabs = GameObject.FindGameObjectsWithTag("Player");
     }
+
+    public static Dictionary<int, int> shotsFiredPerPlayer = new Dictionary<int, int>();
 
     void Update()
     {
@@ -40,6 +43,16 @@ public class PlayerShooting : MonoBehaviour
         // Instantiate the projectile at the calculated position
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
+        if (shotsFiredPerPlayer.ContainsKey(controllerIndex))
+        {
+            shotsFiredPerPlayer[controllerIndex]++;
+            Debug.Log(shotsFiredPerPlayer[controllerIndex]);
+        }
+        else
+        {
+            shotsFiredPerPlayer[controllerIndex] = 1;
+        }
+        
         // Get the Rigidbody component of the projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 

@@ -8,7 +8,7 @@ public abstract class Ammo : MonoBehaviour
     [SerializeField] protected float destroyDelay = 10f;
 
     public float moveSpeed = 10f;
-    public Vector3 moveDir = Vector3.forward;
+    [HideInInspector] public Vector3 moveDir = Vector3.forward;
     [SerializeField] protected float knockbackForce = 15f;
     protected Rigidbody rb;
 

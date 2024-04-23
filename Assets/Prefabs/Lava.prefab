@@ -50,9 +50,15 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 0}
   gameOverScreen: {fileID: 0}
-  gameOverText: {fileID: 0}
   gameOverWinnerText: {fileID: 0}
-  gameOverResultsText: {fileID: 0}
+  gameOverWinnerAvatar: {fileID: 0}
+  gameOverPlayerTwoAvatar: {fileID: 0}
+  gameOverPlayerThreeAvatar: {fileID: 0}
+  gameOverPlayerFourAvatar: {fileID: 0}
+  gameOverWinnerShotsFiredText: {fileID: 0}
+  gameOverPlayerTwoShotsFiredText: {fileID: 0}
+  gameOverPlayerThreeShotsFiredText: {fileID: 0}
+  gameOverPlayerFourShotsFiredText: {fileID: 0}
   gameOverPanel: {fileID: 0}
   gameOverLoadingText: {fileID: 0}
   levelLoadTime: 5
@@ -84,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3094ed43096c2e846ba03e3099f65f0a, type: 2}
+  - {fileID: 2100000, guid: c719e38f25a9480abd2480ab621a2949, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
