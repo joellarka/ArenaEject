@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appropriatlySpawned: 0
   controllerIndex: 1
-  rotationSpeedRads: 1
+  rotationSpeedRads: 1.5
 --- !u!114 &2782248709497289612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +122,6 @@ MonoBehaviour:
   appropriatlySpawned: 0
   weaponCarryPoint: {fileID: 3093174816102973738}
   carriedWeaponTransform: {fileID: 7336916088099221024}
-  inventory: []
   carriedWeapon: {fileID: 0}
 --- !u!114 &6124344014326713301
 MonoBehaviour:
