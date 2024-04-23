@@ -121,6 +121,7 @@ MonoBehaviour:
   controllerIndex: 1
   appropriatlySpawned: 0
   weaponCarryPoint: {fileID: 3093174816102973738}
+  weaponLaunchForce: 8
   carriedWeaponTransform: {fileID: 7336916088099221024}
   carriedWeapon: {fileID: 0}
 --- !u!114 &6124344014326713301

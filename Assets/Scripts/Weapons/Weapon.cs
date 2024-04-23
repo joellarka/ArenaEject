@@ -10,9 +10,11 @@ public class Weapon : MonoBehaviour
     public float initialUpwardForce = 20f;
     [SerializeField] protected float fireRate = 0.5f;
     private float fireTimer = 0;
+    [SerializeField] protected float knockbackForce = 10f;
     [SerializeField] protected bool weaponDeterminesAmmoSpeed = true;
     [SerializeField] protected float ammoSpeed = 3f;
     [SerializeField] protected Vector3 ammoDirOffSet = Vector3.zero;
+    [SerializeField] protected float destroyDelay = 5f;
 
     public virtual bool TryShoot()
     {
@@ -51,5 +53,27 @@ public class Weapon : MonoBehaviour
             projectileScr.moveSpeed = ammoSpeed;
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent<KnockBackHandler>(out KnockBackHandler hit))
+        {
+            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+
+            if(rb != null) 
+            {
+                Vector3 dir = rb.velocity.normalized;
+                dir.y = 0;
+                hit.GetKnockedBack(dir, knockbackForce);
+            }
+            Destroy(gameObject);
+        }
+        DestroyAfterDelay();
+    }
+
+    protected virtual void DestroyAfterDelay()
+    {
+        Destroy(gameObject, destroyDelay);
     }
 }

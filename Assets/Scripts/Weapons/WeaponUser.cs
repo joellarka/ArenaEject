@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponUser : MonoBehaviour 
@@ -9,6 +10,7 @@ public class WeaponUser : MonoBehaviour
 
 
     [SerializeField] private Transform weaponCarryPoint;
+    [SerializeField] private float weaponLaunchForce = 8f;
     public Transform carriedWeaponTransform;
 
     public Weapon carriedWeapon = null;
@@ -75,9 +77,26 @@ public class WeaponUser : MonoBehaviour
     {
         if (carriedWeapon == null) return;
 
-        // TODO: Throw a projectile with the model of the equiped weapon
+        CapsuleCollider collider = carriedWeapon.GetComponent<CapsuleCollider>();   
+        Vector3 dropPosition = transform.position + transform.forward * 1.5f;
+        dropPosition.y += 1f;
+        Quaternion dropRotation = Quaternion.Euler(0f, 90f, 0f);
 
-        Destroy(carriedWeapon.gameObject);
+        carriedWeapon.gameObject.SetActive(true);
+        carriedWeapon.transform.position = dropPosition;
+        carriedWeapon.transform.rotation *= dropRotation;
+        carriedWeapon.transform.SetParent(null);
+
+        Rigidbody wpRb = carriedWeapon.AddComponent<Rigidbody>();
+
+        if (wpRb != null)
+        {
+            Vector3 launchDirection = gameObject.transform.forward;
+            wpRb.AddForce(launchDirection * weaponLaunchForce, ForceMode.Impulse);
+            wpRb.AddForce(transform.TransformDirection(Vector3.up) * 3f, ForceMode.Impulse);
+            collider.isTrigger = false;
+        }
+
         carriedWeapon = null;
     }
 
