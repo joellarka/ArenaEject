@@ -96,18 +96,6 @@ public class GameStartManager : MonoBehaviour
                     weaponUser.controllerIndex = controllerIndex;
                 }
 
-                // Player Shooting
-                if(playerShooting == null)
-                {
-                    Debug.Log("Player prefab is missing Player Shooting script");
-                }
-                else
-                {
-                    playerShooting.appropriatlySpawned = true;
-                    playerShooting.playerIndex = playerIndex;
-                    playerShooting.controllerIndex = controllerIndex;
-                }
-
             }
             else
             {
