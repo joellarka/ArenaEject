@@ -3,18 +3,29 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public GameObject[] playerPrefabs;
     public Transform shootPoint;
     public float shootForce = 25f;
     public float fireRate = 0.5f;
     public float spawnDistance = 1.0f; // Adjust this distance as needed
     private float nextFireTime = 0f;
 
+    [HideInInspector] public bool appropriatlySpawned = false;
     [HideInInspector] public int controllerIndex = 1;
+    [HideInInspector] public int playerIndex = 1;
+
+    void Start()
+    {
+        playerPrefabs = GameObject.FindGameObjectsWithTag("Player");
+    }
 
     void Update()
     {
-        if (Input.GetButtonDown($"Fire{controllerIndex}") && Time.time >= nextFireTime)
+        bool playerFireInput = Input.GetButtonDown($"P{controllerIndex}_Fire");
+
+        if (Input.GetButtonDown($"P{controllerIndex}_Fire"))
         {
+            Debug.Log(controllerIndex);
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
