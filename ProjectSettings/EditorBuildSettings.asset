@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/_StartScreen.unity
     guid: 87bd9dce08a38614d9de7feac17a797e
   - enabled: 1
+    path: Assets/Scenes/DevFarraz.unity
+    guid: 161f4b997bb6d4227a8d5cf3a1ac9f37
+  - enabled: 0
     path: Assets/Scenes/_GameScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

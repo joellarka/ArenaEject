@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public int playerIndex = 1;
-    public int lives = 3;
+    public int lives = 1;
     public bool alive { get => lives > 0; }
 
     [Header("TEMP")]
@@ -20,6 +20,14 @@ public class PlayerStats : MonoBehaviour
 
             myRenderer.material = Instantiate(myRenderer.material);
             myRenderer.material.color = colors[playerIndex-1];
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("KillPlane"))
+        {
+            Destroy(gameObject);
         }
     }
 }

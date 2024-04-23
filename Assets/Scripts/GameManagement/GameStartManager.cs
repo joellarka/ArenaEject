@@ -54,6 +54,7 @@ public class GameStartManager : MonoBehaviour
                 Movement playerMovement = playerObj.GetComponent<Movement>();
                 Aiming playerAim = playerObj.GetComponent<Aiming>();
                 WeaponUser weaponUser = playerObj.GetComponent<WeaponUser>();
+                PlayerShooting playerShooting = playerObj.GetComponent<PlayerShooting>();
                 
                 // Stats set-up
                 if(playerStats == null) {
@@ -93,6 +94,18 @@ public class GameStartManager : MonoBehaviour
                 {
                     weaponUser.appropriatlySpawned = true;
                     weaponUser.controllerIndex = controllerIndex;
+                }
+
+                // Player Shooting
+                if(playerShooting == null)
+                {
+                    Debug.Log("Player prefab is missing Player Shooting script");
+                }
+                else
+                {
+                    playerShooting.appropriatlySpawned = true;
+                    playerShooting.playerIndex = playerIndex;
+                    playerShooting.controllerIndex = controllerIndex;
                 }
 
             }

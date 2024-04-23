@@ -82,6 +82,6 @@ public class StartScreenManager : MonoBehaviour
         Dictionary<int, int> pci = JoinScreenManager.Instance.PlayerToControllerIndex;
         PlayerData.playerToControllerBinding = pci;
 
-        SceneManager.LoadScene(Paths.GAME_SCENE_NAME);
+        SceneManager.LoadScene(Paths.FARRAZ_SCENE_NAME);
     }
 }

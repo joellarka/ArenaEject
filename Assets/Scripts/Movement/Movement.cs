@@ -9,12 +9,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private float acceleration = 20f;
 	private Vector3 rawInput;
     private Rigidbody rb;
+    public float gravityValue = -20f;
 
     [HideInInspector] public int controllerIndex = 1;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Physics.gravity = new Vector3(0, gravityValue, 0);
     }
 
     void Update()
