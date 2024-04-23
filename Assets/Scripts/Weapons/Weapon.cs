@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public Ammo ammoTypePrefab;
     public Transform firePoint;
     public int ammoCount = 1;
+    public float initialUpwardForce = 20f;
     [SerializeField] protected float fireRate = 0.5f;
     private float fireTimer = 0;
     [SerializeField] protected bool weaponDeterminesAmmoSpeed = true;
@@ -35,11 +36,16 @@ public class Weapon : MonoBehaviour
         Ammo projectileScr = projectileObj.GetComponent<Ammo>();
         Vector3 projectileDir = projectileObj.transform.forward;
         ammoDirOffSet.Normalize();
-        projectileDir.x += ammoDirOffSet.x;
-        projectileDir.y += ammoDirOffSet.y;
-        projectileDir.z += ammoDirOffSet.z;
         projectileDir.Normalize();
         projectileScr.moveDir = projectileDir;
+
+        if (!projectileObj.GetComponent<Projectile>())
+        {
+            Rigidbody projectileRb = projectileObj.GetComponent<Rigidbody>();
+            projectileRb.velocity = Vector3.zero;
+            projectileRb.AddForce(Vector3.up * initialUpwardForce, ForceMode.Impulse);
+        }
+
         if (weaponDeterminesAmmoSpeed)
         {
             projectileScr.moveSpeed = ammoSpeed;
